@@ -1,6 +1,5 @@
 import { mockFeedSinceDateResponse } from '../Mocks/data'
-import { getTransactionDate, getStarEndOfWeekDaysByTransactionTime, getComputedDate } from './index'
-import { NUMBER_OF_DAYS_WEEK } from '../Utils/constants'
+import { getTransactionDate, getStarEndOfWeekDaysByTransactionTime, getStartDateFromTransactionDate, getEndDateFromTransactionDate } from './index'
 
 describe('Customer service', () => {
   it('should created a new date object from transaction time', () => {
@@ -17,8 +16,8 @@ describe('Customer service', () => {
     const dayOfTheWeek = transactionDate.getDay()
     const { startDate, endDate } = getStarEndOfWeekDaysByTransactionTime(transactionTime)
 
-    const expectedWeekStartDate = getComputedDate(transactionDate, -dayOfTheWeek)
-    const expectedWeekEndDate = getComputedDate(transactionDate, +(NUMBER_OF_DAYS_WEEK - dayOfTheWeek))
+    const expectedWeekStartDate = getStartDateFromTransactionDate(transactionDate, dayOfTheWeek)
+    const expectedWeekEndDate = getEndDateFromTransactionDate(transactionDate, dayOfTheWeek)
 
     expect(startDate.getDate()).toBe(expectedWeekStartDate.getDate())
     expect(endDate.getDate()).toBe(expectedWeekEndDate.getDate())

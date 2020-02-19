@@ -6,11 +6,15 @@ const getComputedDate = (date: Date, days: number): Date => {
   return dateCloned
 }
 
+const getStartDateFromTransactionDate = (transactionDate: Date, dayOfTheWeek: number) => getComputedDate(transactionDate, -dayOfTheWeek)
+
+const getEndDateFromTransactionDate = (transactionDate: Date, dayOfTheWeek: number) => getComputedDate(transactionDate, +(NUMBER_OF_DAYS_WEEK - dayOfTheWeek))
+
 const getStarEndOfWeekDaysByTransactionTime = (transactionTime: string): { startDate: Date, endDate: Date } => {
   const transactionDate: Date = new Date(transactionTime)
   const dayOfTheWeek: number = transactionDate.getDay()
-  const startDate: Date = getComputedDate(transactionDate, -dayOfTheWeek)
-  const endDate: Date = getComputedDate(transactionDate, +(NUMBER_OF_DAYS_WEEK - dayOfTheWeek))
+  const startDate: Date = getStartDateFromTransactionDate(transactionDate, dayOfTheWeek)
+  const endDate: Date = getEndDateFromTransactionDate(transactionDate, dayOfTheWeek)
   return { startDate, endDate }
 }
 
@@ -21,5 +25,6 @@ const getTransactionDate = (transactionTime: string): Date => {
 export {
   getTransactionDate,
   getStarEndOfWeekDaysByTransactionTime,
-  getComputedDate
+  getStartDateFromTransactionDate,
+  getEndDateFromTransactionDate
 }
