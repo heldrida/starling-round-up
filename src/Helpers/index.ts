@@ -1,4 +1,5 @@
-import { NUMBER_OF_DAYS_WEEK } from '../Utils/constants'
+import { NUMBER_OF_DAYS_WEEK, APP_ENDPOINTS } from '../Utils/constants'
+import axios from 'axios'
 
 const getComputedDate = (date: Date, days: number): Date => {
   const dateCloned = new Date(date.valueOf())
@@ -22,9 +23,16 @@ const getTransactionDate = (transactionTime: string): Date => {
   return new Date(transactionTime)
 }
 
+const get = axios.get
+
+const getAccounts = async () => {
+  return await get(APP_ENDPOINTS.accounts)
+}
+
 export {
   getTransactionDate,
   getStarEndOfWeekDaysByTransactionTime,
   getStartDateFromTransactionDate,
-  getEndDateFromTransactionDate
+  getEndDateFromTransactionDate,
+  getAccounts
 }

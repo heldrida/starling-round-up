@@ -1,5 +1,13 @@
-import { mockFeedSinceDateResponse } from '../Mocks/data'
-import { getTransactionDate, getStarEndOfWeekDaysByTransactionTime, getStartDateFromTransactionDate, getEndDateFromTransactionDate } from './index'
+import { mockFeedSinceDateResponse, mockAccountResponse } from '../Mocks/data'
+import { getTransactionDate,
+         getStarEndOfWeekDaysByTransactionTime,
+         getStartDateFromTransactionDate,
+         getEndDateFromTransactionDate,
+         getAccounts } from './index'
+import axios from 'axios'
+import { APP_ENDPOINTS } from '../Utils/constants'
+
+jest.mock('axios')
 
 describe('Customer service', () => {
   it('should created a new date object from transaction time', () => {
@@ -21,5 +29,15 @@ describe('Customer service', () => {
 
     expect(startDate.getDate()).toBe(expectedWeekStartDate.getDate())
     expect(endDate.getDate()).toBe(expectedWeekEndDate.getDate())
+  })
+})
+
+describe('API service', () => {
+  it('should fetch data from the account endpoint', async () => {
+    axios.get.mockImplementationOnce(() => Promise.resolve(mockAccountResponse.accounts[0]))
+    await expect(getAccounts()).resolves.toEqual(mockAccountResponse.accounts[0])
+    expect(axios.get).toHaveBeenCalledWith(
+      APP_ENDPOINTS.accounts
+    )
   })
 })
