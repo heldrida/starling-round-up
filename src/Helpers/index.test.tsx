@@ -6,6 +6,8 @@ describe('Customer service', () => {
     const { transactionTime } = mockFeedSinceDateResponse.feedItems[0]
     const transactionDate: Date = getTransactionDate(transactionTime)
     expect(transactionDate instanceof Date).toBe(true)
+    expect(typeof transactionDate.getDay).toBe('function')
+    expect(typeof transactionDate.getFullYear).toBe('function')
   })
 
   it('should find the weeks starting and final dates from a given date', () => {
