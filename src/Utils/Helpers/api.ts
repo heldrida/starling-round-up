@@ -1,6 +1,6 @@
 import { APP_ENDPOINTS, DEFAULT_SERVER_PORT } from '../constants'
 import axios from 'axios'
-
+import { IGetAccountsResponseData } from '../Types'
 
 const get = axios.get
 const put = axios.put
@@ -23,7 +23,7 @@ const httpHandler = async (action: () => Promise<any>, errorHandler: (e: any) =>
 
 const proxyServerLocation = getProxyServerLocation()
 
-const getAccounts = async () => {
+const getAccounts = async (): Promise<IGetAccountsResponseData> => {
   const targetUrl = `${proxyServerLocation}${APP_ENDPOINTS.accounts}`
   return await (get(targetUrl))
 }

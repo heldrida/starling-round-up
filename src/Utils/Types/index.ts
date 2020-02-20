@@ -5,6 +5,22 @@ interface IAccount {
   "createdAt": string
 }
 
+interface IGetAccountsResponseData {
+  data?: {
+    accounts?: IAccount[]
+  }
+}
+
+interface IAccountResponseError {
+  "errors": [
+    {
+      "message": string
+    }
+  ]
+}
+
 export {
-  IAccount
+  IAccount,
+  IGetAccountsResponseData,
+  IAccountResponseError
 }
