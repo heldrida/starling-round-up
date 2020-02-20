@@ -86,7 +86,7 @@ it('should sum all the computed rounded-up values in a list', () => {
 
 describe('API service', () => {
   it('should fetch data from the account endpoint', async () => {
-    axios.get.mockImplementationOnce(() => Promise.resolve(mockAccountResponse.accounts[0]))
+    (axios as any).get.mockImplementationOnce(() => Promise.resolve(mockAccountResponse.accounts[0]))
     await expect(getAccounts()).resolves.toEqual(mockAccountResponse.accounts[0])
     expect(axios.get).toHaveBeenCalledWith(
       APP_ENDPOINTS.accounts
@@ -94,7 +94,7 @@ describe('API service', () => {
   })
 
   it('should fetch data from the feed items endpoint', async () => {
-    axios.get.mockImplementationOnce(() => Promise.resolve(mockFeedSinceDateResponse.feedItems))
+    (axios as any).get.mockImplementationOnce(() => Promise.resolve(mockFeedSinceDateResponse.feedItems))
     await expect(getFeedItems()).resolves.toEqual(mockFeedSinceDateResponse.feedItems)
     expect(axios.get).toHaveBeenCalledWith(
       APP_ENDPOINTS.feedItems
