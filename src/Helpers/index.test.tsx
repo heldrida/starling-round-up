@@ -14,7 +14,8 @@ import { getTransactionDate,
          roundUpCurrency,
          listOfValuesComputeWith,
          generateWeekNameByStarEndDates, 
-         putSavingGoals} from './index'
+         putSavingGoals,
+         httpHandler } from './index'
 import axios from 'axios'
 import { APP_ENDPOINTS } from '../Utils/constants'
 
@@ -152,11 +153,9 @@ describe('API service', () => {
 
   it('should the put save goals endpoint fail throw exception', async () => {
     (axios as any).put.mockImplementationOnce(() => Promise.reject(mockPutSavingGoalsResponseError))
-    // TODO: create handler in the UI and update test
-    try {
-      await putSavingGoals()
-    } catch (e) {
+    const errorHandler = (e: any) => {
       expect(e).toEqual(mockPutSavingGoalsResponseError)
     }
+    httpHandler(putSavingGoals, errorHandler)
   })
 })

@@ -26,8 +26,18 @@ const getTransactionDate = (transactionTime: string): Date => {
 const get = axios.get
 const put = axios.put
 
+const httpHandler = async (action: () => Promise<any>, errorHandler: (e: any) => void) => {
+  try {
+    const { data } = await action()
+    return data
+  } catch (err) {
+    typeof errorHandler === 'function' &&
+    errorHandler(err)
+  }
+}
+
 const getAccounts = async () => {
-  return await get(APP_ENDPOINTS.accounts)
+  return await (get(APP_ENDPOINTS.accounts))
 }
 
 const getFeedItems = async () => {
@@ -68,6 +78,7 @@ export {
   getFeedItems,
   getSavingsGoals,
   putSavingGoals,
+  httpHandler,
   converMinorUnitToTwoDecimal,
   roundUpCurrency,
   listOfValuesComputeWith,
