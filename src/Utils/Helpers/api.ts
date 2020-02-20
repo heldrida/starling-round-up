@@ -28,8 +28,16 @@ const getAccounts = async (): Promise<IGetAccountsResponseData> => {
   return await (get(targetUrl))
 }
 
-const getFeedItems = async () => {
-  const targetUrl = `${proxyServerLocation}${APP_ENDPOINTS.feedItems}`
+const getFeedItems = async (accountUid: string, categoryUid: string) => {
+  // feedItems: '/api/v2/feed/account/$accountUid/category/$categoryUid',
+  // const data = {
+  //   accountUid,
+  //   categoryUid
+  // }
+  // const path = Object.keys(data).reduce((acc, curr, index) => acc = acc.replace(`$${Object.keys(data)[index]}`, curr), APP_ENDPOINTS.feedItems)
+  let path = APP_ENDPOINTS.feedItems.replace('$accountUid', accountUid)
+  path = path.replace('$categoryUid', categoryUid)
+  const targetUrl = `${proxyServerLocation}${path}`
   return await get(targetUrl)
 }
 

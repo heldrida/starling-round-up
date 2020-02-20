@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import { getAccounts } from '../../Utils/Helpers/api'
 import { IAccount, IAccountResponseError } from '../../Utils/Types'
 import Account from '../../Components/Account'
 import { CtaButton } from './styled'
+import TransactionFeed from '../../Components/ TransactionFeed'
 
 const Dashboard = () => {
   const [accounts, setAccounts] = useState<IAccount[] | undefined>(undefined)
@@ -31,19 +32,24 @@ const Dashboard = () => {
 
   return (
     <>
-      {
-        !error &&
-        accounts &&
-        accounts.map((account: IAccount, key) => (
-          <Account key={key} account={account}>
-            <CtaButton onClick={accountSelectionHandler} data-accountuid={account.accountUid}>{`Select this account`}</CtaButton>
-          </Account>
-        ))
-      }
-      {
-        selectedAccountUid &&
-        console.log('[debug] selectedAccountUid: ', selectedAccountUid)
-      }
+      <div>
+        <h1>Accounts</h1>
+        {
+          !error &&
+          accounts &&
+          accounts.map((account: IAccount, key) => (
+            <Account key={key} account={account}>
+              <CtaButton onClick={accountSelectionHandler} data-accountuid={account.accountUid}>{`Select this account`}</CtaButton>
+            </Account>
+          ))
+        }
+      </div>
+      <div>
+        {
+          selectedAccountUid &&
+          <TransactionFeed selectedAccountUid={selectedAccountUid} />
+        }
+      </div>
     </>
   )
 }

@@ -5,7 +5,7 @@ import { IAccount } from '../../Utils/Types'
 const Account = ({account, children}:{account: IAccount, children?: any}) => (
   <>
     <AccountContainer>
-      <h3>Account details:</h3>
+      <h3>Bank account details</h3>
       <AccountItem>
         <span>{'uid'}</span>
         {account?.accountUid}

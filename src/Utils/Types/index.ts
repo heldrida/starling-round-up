@@ -19,8 +19,13 @@ interface IAccountResponseError {
   ]
 }
 
+interface IFeedItems {
+  feedItems: any[]
+}
+
 export {
   IAccount,
   IGetAccountsResponseData,
-  IAccountResponseError
+  IAccountResponseError,
+  IFeedItems
 }

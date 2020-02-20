@@ -64,6 +64,7 @@ app.use('*', async (req, res) => {
     const data = await get(`${originalUrl}`)
     res.send(data)
   } catch (e) {
+    console.error(e)
     res.status(500).send(e)    
   }
 })
