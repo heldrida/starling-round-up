@@ -29,9 +29,9 @@ app.use((req, res, next) => {
   next()
 });
 
-app.use('/api/v2/accounts', async (req, res) => {
+app.use(APP_ENDPOINTS.accounts, async (req, res) => {
   try {
-    const data = await get('/api/v2/accounts')
+    const data = await get(APP_ENDPOINTS.accounts)
     res.send(data)
   } catch (e) {
     res.status(500).send(e)    

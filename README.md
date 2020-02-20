@@ -19,18 +19,22 @@ Solution provided by Helder @ www.punkbit.com
 The project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), so
 the following common scripts are available,
 
-To start:
+Assuming you have node and your favourite package manager installed, run your package manager install:
+
+### `yarn install`
+
+Start by running the local proxy server:
+
+### `yarn api`
+
+The application:
 
 ### `yarn start`
 
-Run tests:
+To run tests:
 
 ### `yarn test`
 
 To Build:
 
 ### `yarn build`
-
-To serve the Production/Built version:
-
-## `npx serve -s build`
