@@ -5,7 +5,8 @@ import { getTransactionDate,
          getEndDateFromTransactionDate,
          getAccounts,
          getFeedItems,
-         converMinorUnitToTwoDecimal } from './index'
+         converMinorUnitToTwoDecimal,
+         roundUpCurrency } from './index'
 import axios from 'axios'
 import { APP_ENDPOINTS } from '../Utils/constants'
 
@@ -49,6 +50,20 @@ describe('Customer service', () => {
     }]
     data.forEach(data => expect(converMinorUnitToTwoDecimal(data.minorUnit)).toBe(data.expectedCurrency))
   })
+})
+
+it('should round-up to the closest pound', () => {
+  const data = [{
+    currency: 4.35,
+    expected: 0.65
+  }, {
+    currency: 5.20,
+    expected: 0.80
+  }, {
+    currency: 0.87,
+    expected: 0.13
+  }]
+  data.forEach(data => expect(roundUpCurrency(data.currency)).toBe(data.expected))
 })
 
 describe('API service', () => {

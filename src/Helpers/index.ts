@@ -35,6 +35,13 @@ const getFeedItems = async () => {
 
 const converMinorUnitToTwoDecimal = (minorUnits: number): number => minorUnits / 100
 
+const roundUpCurrency = (minorUnits: number) => {
+  const minorUnitsParsed = parseFloat(""+minorUnits).toFixed(2)
+  const decimalPart = +("" + minorUnitsParsed).split('.')[1]
+  let computed = decimalPart > 0 ? (1 - (decimalPart/100)) : 0
+  return computed
+}
+
 export {
   getTransactionDate,
   getStarEndOfWeekDaysByTransactionTime,
@@ -42,5 +49,6 @@ export {
   getEndDateFromTransactionDate,
   getAccounts,
   getFeedItems,
-  converMinorUnitToTwoDecimal
+  converMinorUnitToTwoDecimal,
+  roundUpCurrency
 }
