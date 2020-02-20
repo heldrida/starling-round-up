@@ -1,9 +1,10 @@
 import React from 'react'
+import Account from './Components/Account'
 
 const App = () => {
   return (
     <>
-      <h1>Starling round-up</h1>
+      <Account />
     </>
   )
 }

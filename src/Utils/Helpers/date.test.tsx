@@ -1,4 +1,4 @@
-import { mockFeedSinceDateResponse } from '../../Mocks/data'
+import { mockFeedSinceDateResponse } from '../Mocks/data'
 import { getTransactionDate,
   getStarEndOfWeekDaysByTransactionTime,
   getStartDateFromTransactionDate,

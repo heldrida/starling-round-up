@@ -6,6 +6,7 @@
  */
 require('dotenv').config()
 
+const cors = require('cors')
 const express = require('express')
 const axios = require('axios')
 const { DEFAULT_SERVER_PORT, RESOURCES_ENDPOINT } = require('../src/Utils/constants')
@@ -45,6 +46,12 @@ app.use((req, res, next) => {
   res.setHeader('Content-Type', 'application/json')
   next()
 })
+
+/**
+ * Enables CORS
+ * Note: For production you'd provide other options such as whitelisting
+ */
+app.use(cors())
 
 /**
  * Listens to any request functioning as a reverse proxy service
