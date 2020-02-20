@@ -36,6 +36,16 @@ describe('Customer service', () => {
     expect(endDate.getDate()).toBe(expectedWeekEndDate.getDate())
   })
 
+  it('should generate the correct week names', () => {
+    const transactionTimes = ['2020-01-02T17:33:28.729Z', '2020-02-05T10:30:00.729Z', '2019-12-05T19:45:56.729Z']
+    const expectedNames = ['december_week_29_to_5', 'february_week_2_to_9', 'december_week_1_to_8']
+    transactionTimes.forEach((transactionTime, index) => {
+      const { startDate, endDate } = getStarEndOfWeekDaysByTransactionTime(transactionTime)
+      const name = generateWeekNameByStarEndDates(startDate, endDate)
+      expect(name).toBe(expectedNames[index])
+    })
+  })
+
   it('should group all the transactions made by groups of weeks', () => {
     const feedItems = mockFeedSinceDateResponse['feedItems']
     const result = feedItems.reduce((acc, curr) => {
@@ -48,7 +58,7 @@ describe('Customer service', () => {
       (acc as any)[hash].push(curr)
       return acc
     }, {})
-    console.log(result)
+    // console.log(result)
   })  
 
   it('should format the amount provided to two decimal currency that is GBP', () => {

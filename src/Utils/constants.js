@@ -7,8 +7,7 @@ const DEFAULT_SERVER_PORT = 8081
 const RESOURCES_ENDPOINT = 'https://api-sandbox.starlingbank.com/'
 
 const MONTH_NAMES = ["january", "february", "march", "april", "may", "june",
-  "july", "august", "september", "october", "november", "december"
-]
+  "july", "august", "september", "october", "november", "december"]
 
 module.exports = {
   NUMBER_OF_DAYS_WEEK,
