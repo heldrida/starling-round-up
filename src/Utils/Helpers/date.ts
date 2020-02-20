@@ -1,4 +1,4 @@
-import { NUMBER_OF_DAYS_WEEK, MONTH_NAMES } from '../Utils/constants'
+import { NUMBER_OF_DAYS_WEEK, MONTH_NAMES } from '../constants'
 
 const getComputedDate = (date: Date, days: number): Date => {
   const dateCloned = new Date(date.valueOf())

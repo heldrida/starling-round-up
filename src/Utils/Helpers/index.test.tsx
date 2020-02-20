@@ -2,7 +2,7 @@ import { mockFeedSinceDateResponse,
          mockAccountResponse,
          mockSavingGoalsList,
          mockPutSavingGoalsResponse,
-         mockPutSavingGoalsResponseError } from '../Mocks/data'
+         mockPutSavingGoalsResponseError } from '../../Mocks/data'
 import { getTransactionDate,
          getStarEndOfWeekDaysByTransactionTime,
          getStartDateFromTransactionDate,
@@ -17,7 +17,7 @@ import { getTransactionDate,
          putSavingGoals,
          httpHandler } from './index'
 import axios from 'axios'
-import { APP_ENDPOINTS } from '../Utils/constants'
+import { APP_ENDPOINTS } from '../constants'
 
 jest.mock('axios')
 

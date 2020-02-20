@@ -1,4 +1,4 @@
-import { APP_ENDPOINTS } from '../Utils/constants'
+import { APP_ENDPOINTS } from '../constants'
 import axios from 'axios'
 
 
