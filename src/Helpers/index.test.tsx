@@ -66,6 +66,23 @@ it('should round-up to the closest pound', () => {
   data.forEach(data => expect(roundUpCurrency(data.currency)).toBe(data.expected))
 })
 
+it('should sum all the computed rounded-up values in a list', () => {
+  const data = [{
+    currency: 4.35,
+    expected: 0.65
+  }, {
+    currency: 5.20,
+    expected: 0.80
+  }, {
+    currency: 0.87,
+    expected: 0.13
+  }]
+  const list = data.map(data => roundUpCurrency(data.currency))
+  const total = list.reduce((acc, curr) => acc += curr, 0)
+  const expectedSum = 1.58
+  expect(total).toBe(expectedSum)
+})
+
 describe('API service', () => {
   it('should fetch data from the account endpoint', async () => {
     axios.get.mockImplementationOnce(() => Promise.resolve(mockAccountResponse.accounts[0]))
