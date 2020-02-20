@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 const axios = require('axios')
-const { DEFAULT_SERVER_PORT, RESOURCES_ENDPOINT, APP_ENDPOINTS} = require('../src/Utils/constants')
+const { DEFAULT_SERVER_PORT, RESOURCES_ENDPOINT } = require('../src/Utils/constants')
 
 const axiosInstance = axios.create({
   baseURL: RESOURCES_ENDPOINT,
@@ -13,9 +13,9 @@ const axiosInstance = axios.create({
   timeout: 5000,
 })
 
-const get = async () => {
+const get = async (originalUrl) => {
   try {
-    const { data } = await axiosInstance.get(APP_ENDPOINTS.accounts)
+    const { data } = await axiosInstance.get(originalUrl)
     return data
   } catch (e) {
     throw new Error(e)
@@ -27,11 +27,12 @@ const app = express()
 app.use((req, res, next) => {
   res.setHeader('Content-Type', 'application/json')
   next()
-});
+})
 
-app.use(APP_ENDPOINTS.accounts, async (req, res) => {
+app.use('*', async (req, res) => {
+  const { originalUrl } = req
   try {
-    const data = await get(APP_ENDPOINTS.accounts)
+    const data = await get(`${originalUrl}`)
     res.send(data)
   } catch (e) {
     res.status(500).send(e)    
