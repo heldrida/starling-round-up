@@ -29,10 +29,15 @@ const getAccounts = async () => {
   return await get(APP_ENDPOINTS.accounts)
 }
 
+const getFeedItems = async () => {
+  return await get(APP_ENDPOINTS.feedItems)
+}
+
 export {
   getTransactionDate,
   getStarEndOfWeekDaysByTransactionTime,
   getStartDateFromTransactionDate,
   getEndDateFromTransactionDate,
-  getAccounts
+  getAccounts,
+  getFeedItems
 }

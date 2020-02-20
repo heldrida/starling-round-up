@@ -3,7 +3,8 @@ import { getTransactionDate,
          getStarEndOfWeekDaysByTransactionTime,
          getStartDateFromTransactionDate,
          getEndDateFromTransactionDate,
-         getAccounts } from './index'
+         getAccounts,
+         getFeedItems } from './index'
 import axios from 'axios'
 import { APP_ENDPOINTS } from '../Utils/constants'
 
@@ -38,6 +39,13 @@ describe('API service', () => {
     await expect(getAccounts()).resolves.toEqual(mockAccountResponse.accounts[0])
     expect(axios.get).toHaveBeenCalledWith(
       APP_ENDPOINTS.accounts
+    )
+  })
+  it('should fetch data from the feed items endpoint', async () => {
+    axios.get.mockImplementationOnce(() => Promise.resolve(mockFeedSinceDateResponse.feedItems))
+    await expect(getFeedItems()).resolves.toEqual(mockFeedSinceDateResponse.feedItems)
+    expect(axios.get).toHaveBeenCalledWith(
+      APP_ENDPOINTS.feedItems
     )
   })
 })
