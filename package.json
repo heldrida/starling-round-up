@@ -156,6 +156,7 @@
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "dotenv": "^8.2.0",
+    "dotenv-expand": "^5.1.0",
     "enzyme": "^3.11.0",
     "nodemon": "^2.0.2",
     "serve": "^11.3.0",

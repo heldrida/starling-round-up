@@ -33,6 +33,10 @@ const getFeedItems = async () => {
   return await get(APP_ENDPOINTS.feedItems)
 }
 
+const getSavingsGoals = async () => {
+  return await get(APP_ENDPOINTS.savingGoals)
+}
+
 const converMinorUnitToTwoDecimal = (minorUnits: number): number => minorUnits / 100
 
 const roundUpCurrency = (minorUnits: number) => {
