@@ -1,4 +1,4 @@
-import { NUMBER_OF_DAYS_WEEK, APP_ENDPOINTS } from '../Utils/constants'
+import { NUMBER_OF_DAYS_WEEK, APP_ENDPOINTS, MONTH_NAMES } from '../Utils/constants'
 import axios from 'axios'
 
 const getComputedDate = (date: Date, days: number): Date => {
@@ -44,6 +44,12 @@ const roundUpCurrency = (minorUnits: number) => {
 
 const listOfValuesComputeWith = (list: number[], cb: (value: number) => number): number => list.reduce((acc, curr) => acc += cb(curr), 0)
 
+const generateWeekNameByStarEndDates = (startDate: Date, endDate: Date): string => {
+  const monthName = MONTH_NAMES[startDate.getMonth()]
+  const named = `${monthName}_week_${startDate.getDate()}_to_${endDate.getDate()}`
+  return named
+}
+
 export {
   getTransactionDate,
   getStarEndOfWeekDaysByTransactionTime,
@@ -53,5 +59,6 @@ export {
   getFeedItems,
   converMinorUnitToTwoDecimal,
   roundUpCurrency,
-  listOfValuesComputeWith
+  listOfValuesComputeWith,
+  generateWeekNameByStarEndDates
 }

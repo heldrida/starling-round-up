@@ -7,7 +7,8 @@ import { getTransactionDate,
          getFeedItems,
          converMinorUnitToTwoDecimal,
          roundUpCurrency,
-         listOfValuesComputeWith } from './index'
+         listOfValuesComputeWith,
+         generateWeekNameByStarEndDates } from './index'
 import axios from 'axios'
 import { APP_ENDPOINTS } from '../Utils/constants'
 
@@ -34,6 +35,21 @@ describe('Customer service', () => {
     expect(startDate.getDate()).toBe(expectedWeekStartDate.getDate())
     expect(endDate.getDate()).toBe(expectedWeekEndDate.getDate())
   })
+
+  it('should group all the transactions made by groups of weeks', () => {
+    const feedItems = mockFeedSinceDateResponse['feedItems']
+    const result = feedItems.reduce((acc, curr) => {
+      const { transactionTime } = curr
+      const { startDate, endDate } = getStarEndOfWeekDaysByTransactionTime(transactionTime)
+      const hash = generateWeekNameByStarEndDates(startDate, endDate)
+      if (!acc.hasOwnProperty(hash)) {
+        (acc as any)[hash] = []
+      }
+      (acc as any)[hash].push(curr)
+      return acc
+    }, {})
+    console.log(result)
+  })  
 
   it('should format the amount provided to two decimal currency that is GBP', () => {
     const data = [{
