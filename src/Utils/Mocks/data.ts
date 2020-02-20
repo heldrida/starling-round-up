@@ -386,9 +386,19 @@ const mockPutSavingGoalsResponse = {
   ]
 }
 
+const mockPutSavingGoalsResponseError = {
+  "errors": [
+    {
+      "message": "Something about the validation error"
+    }
+  ],
+  "success": false
+}
+
 export {
   mockAccountResponse,
   mockFeedSinceDateResponse,
   mockSavingGoalsList,
-  mockPutSavingGoalsResponse
+  mockPutSavingGoalsResponse,
+  mockPutSavingGoalsResponseError
 }

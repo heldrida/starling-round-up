@@ -3,7 +3,7 @@ import { mockFeedSinceDateResponse,
   mockAccountResponse,
   mockSavingGoalsList,
   mockPutSavingGoalsResponse,
-  mockPutSavingGoalsResponseError } from '../../Mocks/data'
+  mockPutSavingGoalsResponseError } from '../Mocks/data'
 import {
   getAccounts,
   getFeedItems,
