@@ -23,6 +23,11 @@ Assuming you have node and your favourite package manager installed, run your pa
 
 ### `yarn install`
 
+Before proceeding you'll need to create a `.env` file in the root directory and set your ACCESS_TOKEN
+as follows:
+
+### ACCESS_TOKEN='xxxxxxxxxxxxx'
+
 Start by running the local proxy server:
 
 ### `yarn api`
