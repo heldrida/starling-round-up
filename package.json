@@ -81,7 +81,8 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "api": "node api"
+    "api": "node api",
+    "api-dev": "npx nodemon api"
   },
   "eslintConfig": {
     "extends": "react-app"
