@@ -46,7 +46,7 @@ const listOfValuesComputeWith = (list: number[], cb: (value: number) => number):
 
 const generateWeekNameByStarEndDates = (startDate: Date, endDate: Date): string => {
   const monthName = MONTH_NAMES[startDate.getMonth()]
-  const named = `${monthName}_week_${startDate.getDate()}_to_${endDate.getDate()}`
+  const named = `${startDate.getFullYear()}_${monthName}_week_${startDate.getDate()}_to_${endDate.getDate()}`
   return named
 }
 

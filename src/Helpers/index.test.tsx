@@ -38,7 +38,7 @@ describe('Customer service', () => {
 
   it('should generate the correct week names', () => {
     const transactionTimes = ['2020-01-02T17:33:28.729Z', '2020-02-05T10:30:00.729Z', '2019-12-05T19:45:56.729Z']
-    const expectedNames = ['december_week_29_to_5', 'february_week_2_to_9', 'december_week_1_to_8']
+    const expectedNames = ['2019_december_week_29_to_5', '2020_february_week_2_to_9', '2019_december_week_1_to_8']
     transactionTimes.forEach((transactionTime, index) => {
       const { startDate, endDate } = getStarEndOfWeekDaysByTransactionTime(transactionTime)
       const name = generateWeekNameByStarEndDates(startDate, endDate)
@@ -58,7 +58,7 @@ describe('Customer service', () => {
       (acc as any)[hash].push(curr)
       return acc
     }, {})
-    const expected = ['december_week_29_to_5', 'january_week_5_to_12', 'february_week_2_to_9']
+    const expected = ['2019_december_week_29_to_5', '2020_january_week_5_to_12', '2020_february_week_2_to_9']
     Object.keys(result).forEach(name => expect(expected.includes(name)).toBe(true))
   })  
 
