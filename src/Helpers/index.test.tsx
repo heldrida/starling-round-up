@@ -4,7 +4,8 @@ import { getTransactionDate,
          getStartDateFromTransactionDate,
          getEndDateFromTransactionDate,
          getAccounts,
-         getFeedItems } from './index'
+         getFeedItems,
+         converMinorUnitToTwoDecimal } from './index'
 import axios from 'axios'
 import { APP_ENDPOINTS } from '../Utils/constants'
 
@@ -31,6 +32,23 @@ describe('Customer service', () => {
     expect(startDate.getDate()).toBe(expectedWeekStartDate.getDate())
     expect(endDate.getDate()).toBe(expectedWeekEndDate.getDate())
   })
+
+  it('should format the amount provided to two decimal currency that is GBP', () => {
+    const data = [{
+      minorUnit: 2050,
+      expectedCurrency: 20.50
+    }, {
+      minorUnit: 1795,
+      expectedCurrency: 17.95
+    }, {
+      minorUnit: 60,
+      expectedCurrency: 0.60
+    }, {
+      minorUnit: 99999,
+      expectedCurrency: 999.99
+    }]
+    data.forEach(data => expect(converMinorUnitToTwoDecimal(data.minorUnit)).toBe(data.expectedCurrency))
+  })
 })
 
 describe('API service', () => {
@@ -41,6 +59,7 @@ describe('API service', () => {
       APP_ENDPOINTS.accounts
     )
   })
+
   it('should fetch data from the feed items endpoint', async () => {
     axios.get.mockImplementationOnce(() => Promise.resolve(mockFeedSinceDateResponse.feedItems))
     await expect(getFeedItems()).resolves.toEqual(mockFeedSinceDateResponse.feedItems)

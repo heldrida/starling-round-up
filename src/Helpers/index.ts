@@ -33,11 +33,14 @@ const getFeedItems = async () => {
   return await get(APP_ENDPOINTS.feedItems)
 }
 
+const converMinorUnitToTwoDecimal = (minorUnits: number): number => minorUnits / 100
+
 export {
   getTransactionDate,
   getStarEndOfWeekDaysByTransactionTime,
   getStartDateFromTransactionDate,
   getEndDateFromTransactionDate,
   getAccounts,
-  getFeedItems
+  getFeedItems,
+  converMinorUnitToTwoDecimal
 }
