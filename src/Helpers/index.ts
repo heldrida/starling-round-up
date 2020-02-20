@@ -42,6 +42,8 @@ const roundUpCurrency = (minorUnits: number) => {
   return computed
 }
 
+const listOfValuesComputeWith = (list: number[], cb: (value: number) => number): number => list.reduce((acc, curr) => acc += cb(curr), 0)
+
 export {
   getTransactionDate,
   getStarEndOfWeekDaysByTransactionTime,
@@ -50,5 +52,6 @@ export {
   getAccounts,
   getFeedItems,
   converMinorUnitToTwoDecimal,
-  roundUpCurrency
+  roundUpCurrency,
+  listOfValuesComputeWith
 }

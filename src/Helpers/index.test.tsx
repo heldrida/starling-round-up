@@ -6,7 +6,8 @@ import { getTransactionDate,
          getAccounts,
          getFeedItems,
          converMinorUnitToTwoDecimal,
-         roundUpCurrency } from './index'
+         roundUpCurrency,
+         listOfValuesComputeWith } from './index'
 import axios from 'axios'
 import { APP_ENDPOINTS } from '../Utils/constants'
 
@@ -77,8 +78,8 @@ it('should sum all the computed rounded-up values in a list', () => {
     currency: 0.87,
     expected: 0.13
   }]
-  const list = data.map(data => roundUpCurrency(data.currency))
-  const total = list.reduce((acc, curr) => acc += curr, 0)
+  const list = data.map(data => data.currency)
+  const total = listOfValuesComputeWith(list, roundUpCurrency)
   const expectedSum = 1.58
   expect(total).toBe(expectedSum)
 })
