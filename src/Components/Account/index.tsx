@@ -2,7 +2,7 @@ import React from 'react'
 import { AccountContainer, AccountItem } from './styled'
 import { IAccount } from '../../Utils/Types'
 
-const Account = ({account}:{account: IAccount}) => (
+const Account = ({account, children}:{account: IAccount, children?: any}) => (
   <>
     <AccountContainer>
       <h3>Account details:</h3>
@@ -22,6 +22,7 @@ const Account = ({account}:{account: IAccount}) => (
         <span>{'created at'}</span>
         {account?.createdAt}
       </AccountItem>
+      { children }
     </AccountContainer>
   </>
 )
