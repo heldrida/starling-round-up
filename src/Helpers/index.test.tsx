@@ -58,7 +58,8 @@ describe('Customer service', () => {
       (acc as any)[hash].push(curr)
       return acc
     }, {})
-    // console.log(result)
+    const expected = ['december_week_29_to_5', 'january_week_5_to_12', 'february_week_2_to_9']
+    Object.keys(result).forEach(name => expect(expected.includes(name)).toBe(true))
   })  
 
   it('should format the amount provided to two decimal currency that is GBP', () => {
