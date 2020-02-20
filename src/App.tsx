@@ -1,10 +1,10 @@
 import React from 'react'
-import Account from './Components/Account'
+import Dashboard from './Container/Dashboard'
 
 const App = () => {
   return (
     <>
-      <Account />
+      <Dashboard />
     </>
   )
 }
