@@ -32,6 +32,10 @@ Start by running the local proxy server:
 
 ### `yarn api`
 
+Obs: during development you might want to run (uses nodemon to auto-reload the server whenever a file changes):
+
+### `yarn api-dev`
+
 The application:
 
 ### `yarn start`
