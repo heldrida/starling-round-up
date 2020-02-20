@@ -1,14 +1,20 @@
-import { mockFeedSinceDateResponse, mockAccountResponse } from '../Mocks/data'
+import { mockFeedSinceDateResponse,
+         mockAccountResponse,
+         mockSavingGoalsList,
+         mockPutSavingGoalsResponse,
+         mockPutSavingGoalsResponseError } from '../Mocks/data'
 import { getTransactionDate,
          getStarEndOfWeekDaysByTransactionTime,
          getStartDateFromTransactionDate,
          getEndDateFromTransactionDate,
          getAccounts,
          getFeedItems,
+         getSavingsGoals,
          converMinorUnitToTwoDecimal,
          roundUpCurrency,
          listOfValuesComputeWith,
-         generateWeekNameByStarEndDates } from './index'
+         generateWeekNameByStarEndDates, 
+         putSavingGoals} from './index'
 import axios from 'axios'
 import { APP_ENDPOINTS } from '../Utils/constants'
 
@@ -126,5 +132,31 @@ describe('API service', () => {
     expect(axios.get).toHaveBeenCalledWith(
       APP_ENDPOINTS.feedItems
     )
+  })
+
+  it('should fetch data from the get save goals endpoint', async () => {
+    (axios as any).get.mockImplementationOnce(() => Promise.resolve(mockSavingGoalsList.savingsGoalList))
+    await expect(getSavingsGoals()).resolves.toEqual(mockSavingGoalsList.savingsGoalList)
+    expect(axios.get).toHaveBeenCalledWith(
+      APP_ENDPOINTS.savingGoals
+    )
+  })
+
+  it('should put data to the get save goals endpoint', async () => {
+    (axios as any).put.mockImplementationOnce(() => Promise.resolve(mockPutSavingGoalsResponse))
+    await expect(putSavingGoals()).resolves.toEqual(mockPutSavingGoalsResponse)
+    expect(axios.put).toHaveBeenCalledWith(
+      APP_ENDPOINTS.putSavingsGoals
+    )
+  })
+
+  it('should the put save goals endpoint fail throw exception', async () => {
+    (axios as any).put.mockImplementationOnce(() => Promise.reject(mockPutSavingGoalsResponseError))
+    // TODO: create handler in the UI and update test
+    try {
+      await putSavingGoals()
+    } catch (e) {
+      expect(e).toEqual(mockPutSavingGoalsResponseError)
+    }
   })
 })

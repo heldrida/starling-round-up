@@ -1,4 +1,3 @@
-
 const mockAccountResponse = {
   "accounts": [
     {
@@ -359,7 +358,37 @@ const mockFeedSinceDateResponse = {
   ]
 }
 
+const mockSavingGoalsList = {
+  "savingsGoalList": [
+    {
+      "savingsGoalUid": "77887788-7788-7788-7788-778877887788",
+      "name": "Trip to Paris",
+      "target": {
+        "currency": "GBP",
+        "minorUnits": 11223344
+      },
+      "totalSaved": {
+        "currency": "GBP",
+        "minorUnits": 11223344
+      },
+      "savedPercentage": 100
+    }
+  ]
+}
+
+const mockPutSavingGoalsResponse = {
+  "savingsGoalUid": "77887788-7788-7788-7788-778877887788",
+  "success": true,
+  "errors": [
+    {
+      "message": "Something about the validation error"
+    }
+  ]
+}
+
 export {
   mockAccountResponse,
-  mockFeedSinceDateResponse
+  mockFeedSinceDateResponse,
+  mockSavingGoalsList,
+  mockPutSavingGoalsResponse
 }

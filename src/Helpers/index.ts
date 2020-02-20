@@ -24,6 +24,7 @@ const getTransactionDate = (transactionTime: string): Date => {
 }
 
 const get = axios.get
+const put = axios.put
 
 const getAccounts = async () => {
   return await get(APP_ENDPOINTS.accounts)
@@ -35,6 +36,10 @@ const getFeedItems = async () => {
 
 const getSavingsGoals = async () => {
   return await get(APP_ENDPOINTS.savingGoals)
+}
+
+const putSavingGoals = async () => {
+  return await put(APP_ENDPOINTS.putSavingsGoals)
 }
 
 const converMinorUnitToTwoDecimal = (minorUnits: number): number => minorUnits / 100
@@ -61,6 +66,8 @@ export {
   getEndDateFromTransactionDate,
   getAccounts,
   getFeedItems,
+  getSavingsGoals,
+  putSavingGoals,
   converMinorUnitToTwoDecimal,
   roundUpCurrency,
   listOfValuesComputeWith,
