@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { CtaButtonSmall } from './styled'
 import { converMinorUnitToTwoDecimal, roundUpCurrency, listOfValuesComputeWith } from '../../Utils/Helpers'
+import { putSavingGoals } from '../../Utils/Helpers/api'
 
 const RoundUpBar = ({cashOutTransactionWeekList}: {cashOutTransactionWeekList: any}) => {
   const [roundUp, setRoundUp] = useState(0)
@@ -13,11 +14,23 @@ const RoundUpBar = ({cashOutTransactionWeekList}: {cashOutTransactionWeekList: a
     roundUp && setRoundUp(roundUp)
   }, [])
 
+  const saveRoundUpHandler = async () => {
+      // await putSavingGoals({
+      //   "name": "Lorem ipsum",
+      //   "currency": "GBP",
+      //   "target": {
+      //     "currency": "GBP",
+      //     "minorUnits": roundUp*100
+      //   },
+      //   "base64EncodedPhoto": "string"
+      // })
+  }
+
   return (
     <div>
       <p>{`The round-up for the amount spent this week is £${roundUp}.`}</p>
       <p>{`Would you like to transfer the amount to your savings?`}</p>
-      <CtaButtonSmall>Save round-up</CtaButtonSmall>
+      <CtaButtonSmall onClick={saveRoundUpHandler}>Save round-up</CtaButtonSmall>
     </div>
   )
 }
