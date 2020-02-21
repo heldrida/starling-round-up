@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CtaButtonSmall } from './styled'
+import { CtaButtonSmall, RoundUpDescription } from './styled'
 import { converMinorUnitToTwoDecimal, roundUpCurrency, listOfValuesComputeWith, convertTwoDecimalToMinorUnit, putSavingGoals, createSavingGoalsPutData } from '../../Utils/Helpers'
 import { CURRENCY_DEFAULT, GOAL_NAME_DEFAULT } from '../../Utils/constants'
 import { ISaveResponse, ICashoutTransactionWeekListItem } from '../../Utils/Types'
@@ -33,8 +33,10 @@ const RoundUpBar = ({cashOutTransactionWeekList, selectedAccountUid}: {cashOutTr
       {
         (!error && !saveResponse &&
           <>
-            <p>{`The round-up for the amount spent this week is £${roundUp}.`}</p>
-            <p>{`Would you like to transfer the amount to your savings?`}</p>
+            <RoundUpDescription>
+              <p>{`The round-up for the amount spent this week is £${roundUp}.`}</p>
+              <p>{`Would you like to transfer the amount to your savings?`}</p>
+            </RoundUpDescription>
             <CtaButtonSmall onClick={saveRoundUpHandler}>Save round-up</CtaButtonSmall>
           </>
         ) ||
