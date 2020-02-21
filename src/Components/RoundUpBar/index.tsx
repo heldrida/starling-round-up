@@ -2,19 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { CtaButtonSmall } from './styled'
 import { converMinorUnitToTwoDecimal, roundUpCurrency, listOfValuesComputeWith, convertTwoDecimalToMinorUnit, putSavingGoals, createSavingGoalsPutData } from '../../Utils/Helpers'
 import { CURRENCY_DEFAULT, GOAL_NAME_DEFAULT } from '../../Utils/constants'
+import { ISaveResponse, ICashoutTransactionWeekList } from '../../Utils/Types'
 
-interface ISaveResponse {
-  savingsGoalUid: string,
-  success: boolean,
-  errors: any[]
-}
-
-const RoundUpBar = ({cashOutTransactionWeekList, selectedAccountUid}: {cashOutTransactionWeekList: any, selectedAccountUid: string}) => {
-  const [roundUp, setRoundUp] = useState(0)
+const RoundUpBar = ({cashOutTransactionWeekList, selectedAccountUid}: {cashOutTransactionWeekList: ICashoutTransactionWeekList, selectedAccountUid: string}) => {
+  const [roundUp, setRoundUp] = useState<number>(0)
   const [saveResponse, setSaveResponse] = useState<ISaveResponse | undefined>(undefined)
 
   useEffect(() => {
-    const list = cashOutTransactionWeekList &&
+    const list: number[] | false = cashOutTransactionWeekList &&
                  Array.isArray(cashOutTransactionWeekList) &&
                  cashOutTransactionWeekList.map((data: any) => converMinorUnitToTwoDecimal(data.amount?.minorUnits))
     const roundUp = list && listOfValuesComputeWith(list, roundUpCurrency)
