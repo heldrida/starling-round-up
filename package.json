@@ -82,7 +82,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "api": "node api",
+    "api": "ts-node api",
     "api-dev": "npx nodemon api"
   },
   "eslintConfig": {
@@ -157,6 +157,9 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/cors": "^2.8.6",
+    "@types/express-pino-logger": "^4.0.2",
+    "@types/pino": "^5.15.5",
     "dotenv": "^8.2.0",
     "dotenv-expand": "^5.1.0",
     "enzyme": "^3.11.0",
@@ -164,6 +167,7 @@
     "nodemon": "^2.0.2",
     "pino-pretty": "^3.6.0",
     "serve": "^11.3.0",
-    "styled-components": "^5.0.1"
+    "styled-components": "^5.0.1",
+    "ts-node": "^8.6.2"
   }
 }

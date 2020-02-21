@@ -19,7 +19,7 @@ const CURRENCY_DEFAULT = 'GBP'
 
 const GOAL_NAME_DEFAULT = 'My savings goal'
 
-module.exports = {
+export {
   NUMBER_OF_DAYS_WEEK,
   APP_ENDPOINTS,
   DEFAULT_SERVER_PORT,

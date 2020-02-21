@@ -1,21 +1,25 @@
+import cors from 'cors'
+import express from 'express'
+import axios from 'axios'
+import { DEFAULT_SERVER_PORT, RESOURCES_ENDPOINT } from '../src/Utils/constants'
+import { CustomError } from '../src/Utils/Helpers/error'
+import bodyParser from 'body-parser'
+import pino from 'pino'
+import expressPinoLogger from 'express-pino-logger'
+import dotenv from 'dotenv'
+
 /**
  * The dotenv allows me to import environment variables
  * check the README.md for instructions regarding need to set your own ACCESS_TOKEN
  * as this is not available in the repository as it's sensitive or private data
  * For example, in production we'd have AWS Secrets Manager or Hashicorp Vault
  */
-require('dotenv').config()
+dotenv.config()
 
-const cors = require('cors')
-const express = require('express')
-const axios = require('axios')
-const { DEFAULT_SERVER_PORT, RESOURCES_ENDPOINT } = require('../src/Utils/constants')
-const { CustomError } = require('../src/Utils/Helpers/error')
 const app = express()
-const bodyParser = require('body-parser')
-const pino = require('express-pino-logger')({
-  prettyPrint: true,
-  colorize: true
+
+const logger = pino({
+  prettyPrint: true
 })
 
 /**
@@ -37,13 +41,13 @@ const axiosInstance = axios.create({
  * making a request to the target resources endpoint(s)
  * @param `originalUrl` is value we pick from the clients original request
  */
-const httpRequestHandler = async (method, originalUrl, body) => {
+const httpRequestHandler = async (method: string, originalUrl: string, body?: any) => {
   const requestMethod = method === 'PUT' ? axiosInstance.put : axiosInstance.get
   try {
     const { data } = await requestMethod(originalUrl, body)
     return data
   } catch (e) {
-    throw new CustomError(e.response.status, e.response.data)
+    throw CustomError(e.response.status, e.response.data)
   }
 }
 
@@ -69,7 +73,7 @@ app.use(cors())
 /**
  * A HTTP logging middleware that is accessible 
  */
-app.use(pino)
+app.use(expressPinoLogger({ logger: logger }))
 
 /**
  * Listens to any request functioning as a reverse proxy service

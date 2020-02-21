@@ -8,9 +8,9 @@ import {
   getAccounts,
   getFeedItems,
   getSavingsGoals,
-  putSavingGoals,
-  httpHandler } from './index'
+  putSavingGoals  } from './index'
 import axios from 'axios'
+import { IParamPutSavingGoals } from '../Types'
 
 jest.mock('axios')
 
@@ -40,18 +40,19 @@ describe('API service', () => {
   })
 
   it('should put data to the get save goals endpoint', async () => {
-    (axios as any).put.mockImplementationOnce(() => Promise.resolve(mockPutSavingGoalsResponse))
-    await expect(putSavingGoals()).resolves.toEqual(mockPutSavingGoalsResponse)
-    expect(axios.put).toHaveBeenCalledWith(
-      `http://localhost:${DEFAULT_SERVER_PORT}${APP_ENDPOINTS.putSavingsGoals}`
-    )
-  })
-
-  it('should the put save goals endpoint fail throw exception', async () => {
-    (axios as any).put.mockImplementationOnce(() => Promise.reject(mockPutSavingGoalsResponseError))
-    const errorHandler = (e: any) => {
-      expect(e).toEqual(mockPutSavingGoalsResponseError)
+    const params: IParamPutSavingGoals = {
+      'name': 'foobar',
+      'currency': 'GDP',
+      'target': {
+        'currency': 'GDP',
+        'minorUnits': 100
+      }
     }
-    httpHandler(putSavingGoals, errorHandler)
+    ;(axios as any).put.mockImplementationOnce(() => Promise.resolve(mockPutSavingGoalsResponse))
+    await expect(putSavingGoals('$accountUid', params)).resolves.toEqual(mockPutSavingGoalsResponse)
+    expect(axios.put).toHaveBeenCalledWith(
+      `http://localhost:${DEFAULT_SERVER_PORT}${APP_ENDPOINTS.putSavingsGoals}`,
+      params
+    )
   })
 })

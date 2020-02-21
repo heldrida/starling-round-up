@@ -23,7 +23,6 @@ const TransactionFeed = ({selectedAccountUid, categoryId, changesSince}: {select
         const transactionsByWeek = data &&
                                    data?.feedItems &&
                                    groupTransactionsByWeeks(data.feedItems)
-        console.log('[debug] transactionsByWeek: ', transactionsByWeek)
         transactionsByWeek &&
         setTransactionsByWeek(transactionsByWeek)
       } catch (err) {
@@ -35,15 +34,8 @@ const TransactionFeed = ({selectedAccountUid, categoryId, changesSince}: {select
 
   useEffect(() => {
     const list = getTransactionsWeekByCashflow(transactionsByWeek, CASH_DIRECTION_OUT)
-    console.log('--- list: ', list)
-    // const cashoutList = list && Array.isArray(list) && list.map((data: any) => converMinorUnitToTwoDecimal(data.amount.minorUnits))
     setCashOutTransactionWeekList(list)
   }, [transactionsByWeek])
-
-  useEffect(() => {
-    console.log('[debug] >>cashOutList: ', cashOutTransactionWeekList)
-    // console.log('[debug] >>list: ', list)
-  }, [cashOutTransactionWeekList])
 
   return (
     <>

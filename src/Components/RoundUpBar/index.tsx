@@ -14,7 +14,7 @@ const RoundUpBar = ({cashOutTransactionWeekList, selectedAccountUid}: {cashOutTr
                  cashOutTransactionWeekList.map((data: any) => converMinorUnitToTwoDecimal(data.amount?.minorUnits))
     const roundUp = list && listOfValuesComputeWith(list, roundUpCurrency)
     roundUp && setRoundUp(roundUp)
-  }, [])
+  }, [cashOutTransactionWeekList])
 
   const saveRoundUpHandler = async () => {
     const minorUnits = convertTwoDecimalToMinorUnit(roundUp)
