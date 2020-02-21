@@ -3,7 +3,7 @@ import { getAccounts } from '../../Utils/Helpers/api'
 import { IAccount, IAccountResponseError } from '../../Utils/Types'
 import Account from '../../Components/Account'
 import { CtaButton } from './styled'
-import TransactionFeed from '../../Components/ TransactionFeed'
+import TransactionFeed from '../../Components/TransactionFeed'
 
 const Dashboard = () => {
   const beginningOfTime = new Date(0).toISOString()

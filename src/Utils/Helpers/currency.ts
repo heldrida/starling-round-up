@@ -1,5 +1,7 @@
 const converMinorUnitToTwoDecimal = (minorUnits: number): number => minorUnits / 100
 
+const traillingZero = (value: number): string => ""+value.toFixed(2) 
+
 const roundUpCurrency = (minorUnits: number) => {
   const minorUnitsParsed = parseFloat(""+minorUnits).toFixed(2)
   const decimalPart = +("" + minorUnitsParsed).split('.')[1]
@@ -12,5 +14,6 @@ const listOfValuesComputeWith = (list: number[], cb: (value: number) => number):
 export {
   converMinorUnitToTwoDecimal,
   roundUpCurrency,
-  listOfValuesComputeWith
+  listOfValuesComputeWith,
+  traillingZero
 }

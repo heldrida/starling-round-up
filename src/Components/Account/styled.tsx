@@ -4,7 +4,8 @@ const AccountContainer = styled.div`
   display: inline-block;
   border: 1px solid #bbb;
   padding: 1rem;
-
+  margin: 1rem;
+  
   & > h3 {
     border-bottom: 1px solid #bbb;
     padding: 1rem 0;

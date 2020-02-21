@@ -11,10 +11,13 @@ const RESOURCES_ENDPOINT = 'https://api-sandbox.starlingbank.com/'
 const MONTH_NAMES = ["january", "february", "march", "april", "may", "june",
   "july", "august", "september", "october", "november", "december"]
 
+const TRANSACTION_TABLE_DATA_NAMES = ['minorUnits', 'direction', 'status', 'transactionTime', 'country']
+
 module.exports = {
   NUMBER_OF_DAYS_WEEK,
   APP_ENDPOINTS,
   DEFAULT_SERVER_PORT,
   RESOURCES_ENDPOINT,
-  MONTH_NAMES
+  MONTH_NAMES,
+  TRANSACTION_TABLE_DATA_NAMES
 }

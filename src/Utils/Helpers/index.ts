@@ -5,6 +5,7 @@ import {
   putSavingGoals,
   httpHandler
 } from './api'
+
 import {
   generateWeekNameByStarEndDates,
   getTransactionDate,
@@ -13,11 +14,18 @@ import {
   getEndDateFromTransactionDate,
   groupTransactionsByWeeks
 } from './date'
+
 import {
   converMinorUnitToTwoDecimal,
   roundUpCurrency,
-  listOfValuesComputeWith
+  listOfValuesComputeWith,
+  traillingZero
 } from './currency'
+
+import {
+  getTableDataNameByType,
+  getTableDateByISO
+} from './transactions'
 
 export {
   getAccounts,
@@ -34,4 +42,7 @@ export {
   converMinorUnitToTwoDecimal,
   roundUpCurrency,
   listOfValuesComputeWith,
+  getTableDataNameByType,
+  getTableDateByISO,
+  traillingZero
 }
