@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { getAccounts } from '../../Utils/Helpers/api'
 import { IAccount, IAccountResponseError } from '../../Utils/Types'
 import Account from '../../Components/Account'
-import { DashboardContainer, DashboardSection, CtaButton } from './styled'
+import { DashboardContainer, DashboardSection, CtaButton, ErrorContainer } from './styled'
 import TransactionFeed from '../../Components/TransactionFeed'
 import Loading from '../../Components/Loading'
 
@@ -49,10 +49,14 @@ const Dashboard = () => {
                          data-categoryid={account.defaultCategory}>{`Select this account`}</CtaButton>
             </Account>
           ))) ||
-          <Loading />
+         (!error && <Loading />)
+        }
+        {
+          error && <ErrorContainer>Oops! Have you followed the README instructions and set you access token?</ErrorContainer>
         }
       </DashboardSection>
       {
+        !error &&
         selectedAccountUid &&
         categoryId &&
         <DashboardSection>

@@ -7,6 +7,7 @@ const RoundUpDescription = styled.div`
 const CtaButtonSmall = styled.button`
   border: 1px solid #333;
   padding: 1rem;
+  cursor: pointer;
 `
 
 export {

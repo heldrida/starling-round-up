@@ -23,10 +23,16 @@ const CtaButton = styled.div`
   padding: 1rem;
   margin: 1rem 0;
   text-align: center;
+  cursor: pointer;
+`
+
+const ErrorContainer = styled.div`
+  padding: 1rem 0;
 `
 
 export {
   DashboardContainer,
   DashboardSection,
-  CtaButton
+  CtaButton,
+  ErrorContainer
 }
