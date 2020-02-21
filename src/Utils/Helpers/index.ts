@@ -12,7 +12,8 @@ import {
   getStarEndOfWeekDaysByTransactionTime,
   getStartDateFromTransactionDate,
   getEndDateFromTransactionDate,
-  groupTransactionsByWeeks
+  groupTransactionsByWeeks,
+  getTransactionsWeekByCashflow
 } from './date'
 
 import {
@@ -44,5 +45,6 @@ export {
   listOfValuesComputeWith,
   getTableDataNameByType,
   getTableDateByISO,
-  traillingZero
+  traillingZero,
+  getTransactionsWeekByCashflow
 }

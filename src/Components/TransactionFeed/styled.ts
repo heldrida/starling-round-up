@@ -23,6 +23,5 @@ const TransactionsByWeekContainer = styled.div`
 `
 
 export {
-  TransactionsByWeekContainer,
-
+  TransactionsByWeekContainer
 }

@@ -2,14 +2,19 @@ import React, { useState, useEffect } from 'react'
 import { getFeedItems } from '../../Utils/Helpers/api'
 import { groupTransactionsByWeeks } from '../../Utils/Helpers/date'
 import { IAccountResponseError, ITransactionsByWeek } from '../../Utils/Types'
-import { TRANSACTION_TABLE_DATA_NAMES } from '../../Utils/constants'
+import { TRANSACTION_TABLE_DATA_NAMES, CASH_DIRECTION_OUT } from '../../Utils/constants'
 import { TransactionsByWeekContainer } from './styled'
-import { getTableDataNameByType, converMinorUnitToTwoDecimal, traillingZero, getTableDateByISO } from '../../Utils/Helpers'
+import { getTableDataNameByType, converMinorUnitToTwoDecimal, traillingZero, getTableDateByISO, getTransactionsWeekByCashflow } from '../../Utils/Helpers'
+import RoundUpBar from '../RoundUpBar'
+
+interface ICashOutTrasnactionWeekList {
+  [name: string]: any
+}
 
 const TransactionFeed = ({selectedAccountUid, categoryId, changesSince}: {selectedAccountUid: string, categoryId: string, changesSince: string}) => {
-  // const [feedItems, setFeedItems] = useState<IFeedItems[] | undefined>(undefined)
   const [error, setError] = useState<IAccountResponseError | undefined>(undefined)
   const [transactionsByWeek, setTransactionsByWeek] = useState<ITransactionsByWeek | undefined>(undefined)
+  const [cashOutTransactionWeekList, setCashOutTransactionWeekList] = useState<ICashOutTrasnactionWeekList | undefined>(undefined)
 
   useEffect(() => {
     const fetchHandler = async () => {
@@ -28,13 +33,25 @@ const TransactionFeed = ({selectedAccountUid, categoryId, changesSince}: {select
     fetchHandler()
   }, [selectedAccountUid, categoryId, changesSince])
 
+  useEffect(() => {
+    const list = getTransactionsWeekByCashflow(transactionsByWeek, CASH_DIRECTION_OUT)
+    console.log('--- list: ', list)
+    // const cashoutList = list && Array.isArray(list) && list.map((data: any) => converMinorUnitToTwoDecimal(data.amount.minorUnits))
+    setCashOutTransactionWeekList(list)
+  }, [transactionsByWeek])
+
+  useEffect(() => {
+    console.log('[debug] >>cashOutList: ', cashOutTransactionWeekList)
+    // console.log('[debug] >>list: ', list)
+  }, [cashOutTransactionWeekList])
+
   return (
     <>
       <h1>Transactions</h1>
       {
         !error &&
         transactionsByWeek &&
-        Object.keys(transactionsByWeek).map((weekName, index) => {
+        Object.keys(transactionsByWeek).map((weekName: string, index) => {
           return (
             <TransactionsByWeekContainer key={index}>
               <h3>{weekName.split('_').join(' ')}</h3>
@@ -71,6 +88,11 @@ const TransactionFeed = ({selectedAccountUid, categoryId, changesSince}: {select
                   }
                 </tbody>
               </table>
+              {
+                cashOutTransactionWeekList &&
+                cashOutTransactionWeekList[weekName] &&
+                <RoundUpBar cashOutTransactionWeekList={cashOutTransactionWeekList[weekName]} />
+              }
             </TransactionsByWeekContainer>
           )
         })

@@ -13,11 +13,14 @@ const MONTH_NAMES = ["january", "february", "march", "april", "may", "june",
 
 const TRANSACTION_TABLE_DATA_NAMES = ['minorUnits', 'direction', 'status', 'transactionTime', 'country']
 
+const CASH_DIRECTION_OUT = 'OUT'
+
 module.exports = {
   NUMBER_OF_DAYS_WEEK,
   APP_ENDPOINTS,
   DEFAULT_SERVER_PORT,
   RESOURCES_ENDPOINT,
   MONTH_NAMES,
-  TRANSACTION_TABLE_DATA_NAMES
+  TRANSACTION_TABLE_DATA_NAMES,
+  CASH_DIRECTION_OUT
 }

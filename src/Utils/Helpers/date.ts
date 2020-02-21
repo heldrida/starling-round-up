@@ -37,10 +37,22 @@ const groupTransactionsByWeeks = (feedItemsList: IFeedItemsList[]): ITransaction
                     if (!acc.hasOwnProperty(hash)) {
                       (acc as any)[hash] = []
                     }
-                    (acc as any)[hash].push(curr)
+                    ;(acc as any)[hash].push(curr)
                     return acc
                   }, {})
   return result
+}
+
+const getTransactionsWeekByCashflow = (transactionsByWeek: any, cashflow: string) => {
+  const transactionWeekNames = transactionsByWeek && Object.keys(transactionsByWeek)
+  const list = transactionsByWeek &&
+               transactionWeekNames &&
+               transactionWeekNames.reduce((acc: any, curr) => {
+                  const filtered = transactionsByWeek[curr].filter((data: { [name: string]: string }) => data?.direction === cashflow)
+                  acc[curr] = filtered
+                  return acc
+               }, {})
+  return list
 }
 
 export {
@@ -49,5 +61,6 @@ export {
   getStarEndOfWeekDaysByTransactionTime,
   getStartDateFromTransactionDate,
   getEndDateFromTransactionDate,
-  groupTransactionsByWeeks
+  groupTransactionsByWeeks,
+  getTransactionsWeekByCashflow
 }
