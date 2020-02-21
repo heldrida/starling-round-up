@@ -31,7 +31,8 @@ const axiosInstance = axios.create({
   headers: {
     'Accept': 'application/json',
     'Authorization': `Bearer  ${process.env.ACCESS_TOKEN}`,
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'User-Agent': 'punkbit.com'
   },
   timeout: 5000,
 })
