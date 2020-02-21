@@ -10,7 +10,8 @@ import {
   getTransactionDate,
   getStarEndOfWeekDaysByTransactionTime,
   getStartDateFromTransactionDate,
-  getEndDateFromTransactionDate
+  getEndDateFromTransactionDate,
+  groupTransactionsByWeeks
 } from './date'
 import {
   converMinorUnitToTwoDecimal,
@@ -29,6 +30,7 @@ export {
   getStarEndOfWeekDaysByTransactionTime,
   getStartDateFromTransactionDate,
   getEndDateFromTransactionDate,
+  groupTransactionsByWeeks,
   converMinorUnitToTwoDecimal,
   roundUpCurrency,
   listOfValuesComputeWith,

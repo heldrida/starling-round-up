@@ -23,9 +23,19 @@ interface IFeedItems {
   feedItems: any[]
 }
 
+interface IFeedItemsList {
+  [name: string]: string
+}
+
+interface ITransactionsByWeek {
+  [name: string]: any
+}
+
 export {
   IAccount,
   IGetAccountsResponseData,
   IAccountResponseError,
-  IFeedItems
+  IFeedItems,
+  IFeedItemsList,
+  ITransactionsByWeek
 }

@@ -3,7 +3,8 @@ import { getTransactionDate,
   getStarEndOfWeekDaysByTransactionTime,
   getStartDateFromTransactionDate,
   getEndDateFromTransactionDate,
-  generateWeekNameByStarEndDates } from './index'
+  generateWeekNameByStarEndDates,
+  groupTransactionsByWeeks } from './index'
   
 it('should created a new date object from transaction time', () => {
   const { transactionTime } = mockFeedSinceDateResponse.feedItems[0]
@@ -38,16 +39,7 @@ it('should generate the correct week names', () => {
 
 it('should group all the transactions made by groups of weeks', () => {
   const feedItems = mockFeedSinceDateResponse['feedItems']
-  const result = feedItems.reduce((acc, curr) => {
-    const { transactionTime } = curr
-    const { startDate, endDate } = getStarEndOfWeekDaysByTransactionTime(transactionTime)
-    const hash = generateWeekNameByStarEndDates(startDate, endDate)
-    if (!acc.hasOwnProperty(hash)) {
-      (acc as any)[hash] = []
-    }
-    (acc as any)[hash].push(curr)
-    return acc
-  }, {})
+  const result = groupTransactionsByWeeks(feedItems)
   const expected = ['2019_december_week_29_to_5', '2020_january_week_5_to_12', '2020_february_week_2_to_9']
   Object.keys(result).forEach(name => expect(expected.includes(name)).toBe(true))
 })

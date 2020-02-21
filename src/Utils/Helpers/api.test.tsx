@@ -1,4 +1,4 @@
-import { APP_ENDPOINTS } from '../constants'
+import { APP_ENDPOINTS, DEFAULT_SERVER_PORT } from '../constants'
 import { mockFeedSinceDateResponse,
   mockAccountResponse,
   mockSavingGoalsList,
@@ -19,15 +19,15 @@ describe('API service', () => {
     (axios as any).get.mockImplementationOnce(() => Promise.resolve(mockAccountResponse.accounts[0]))
     await expect(getAccounts()).resolves.toEqual(mockAccountResponse.accounts[0])
     expect(axios.get).toHaveBeenCalledWith(
-      APP_ENDPOINTS.accounts
+      `http://localhost:${DEFAULT_SERVER_PORT}${APP_ENDPOINTS.accounts}`
     )
   })
 
   it('should fetch data from the feed items endpoint', async () => {
     (axios as any).get.mockImplementationOnce(() => Promise.resolve(mockFeedSinceDateResponse.feedItems))
-    await expect(getFeedItems()).resolves.toEqual(mockFeedSinceDateResponse.feedItems)
+    await expect(getFeedItems('$accountUid', '$categoryUid', 'xxxx')).resolves.toEqual(mockFeedSinceDateResponse.feedItems)
     expect(axios.get).toHaveBeenCalledWith(
-      APP_ENDPOINTS.feedItems
+      `http://localhost:${DEFAULT_SERVER_PORT}${APP_ENDPOINTS.feedItems}?changesSince=xxxx`
     )
   })
 
@@ -35,7 +35,7 @@ describe('API service', () => {
     (axios as any).get.mockImplementationOnce(() => Promise.resolve(mockSavingGoalsList.savingsGoalList))
     await expect(getSavingsGoals()).resolves.toEqual(mockSavingGoalsList.savingsGoalList)
     expect(axios.get).toHaveBeenCalledWith(
-      APP_ENDPOINTS.savingGoals
+      `http://localhost:${DEFAULT_SERVER_PORT}${APP_ENDPOINTS.savingGoals}`
     )
   })
 
@@ -43,7 +43,7 @@ describe('API service', () => {
     (axios as any).put.mockImplementationOnce(() => Promise.resolve(mockPutSavingGoalsResponse))
     await expect(putSavingGoals()).resolves.toEqual(mockPutSavingGoalsResponse)
     expect(axios.put).toHaveBeenCalledWith(
-      APP_ENDPOINTS.putSavingsGoals
+      `http://localhost:${DEFAULT_SERVER_PORT}${APP_ENDPOINTS.putSavingsGoals}`
     )
   })
 

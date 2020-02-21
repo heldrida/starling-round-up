@@ -1,4 +1,5 @@
 import { NUMBER_OF_DAYS_WEEK, MONTH_NAMES } from '../constants'
+import { IFeedItemsList, ITransactionsByWeek } from '../Types'
 
 const getComputedDate = (date: Date, days: number): Date => {
   const dateCloned = new Date(date.valueOf())
@@ -28,10 +29,25 @@ const generateWeekNameByStarEndDates = (startDate: Date, endDate: Date): string 
   return named
 }
 
+const groupTransactionsByWeeks = (feedItemsList: IFeedItemsList[]): ITransactionsByWeek => {
+  const result = feedItemsList.reduce((acc, curr): ITransactionsByWeek => {
+                    const { transactionTime } = curr
+                    const { startDate, endDate } = getStarEndOfWeekDaysByTransactionTime(transactionTime)
+                    const hash = generateWeekNameByStarEndDates(startDate, endDate)
+                    if (!acc.hasOwnProperty(hash)) {
+                      (acc as any)[hash] = []
+                    }
+                    (acc as any)[hash].push(curr)
+                    return acc
+                  }, {})
+  return result
+}
+
 export {
   generateWeekNameByStarEndDates,
   getTransactionDate,
   getStarEndOfWeekDaysByTransactionTime,
   getStartDateFromTransactionDate,
-  getEndDateFromTransactionDate
+  getEndDateFromTransactionDate,
+  groupTransactionsByWeeks
 }

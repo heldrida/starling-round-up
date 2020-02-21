@@ -10,6 +10,7 @@ const cors = require('cors')
 const express = require('express')
 const axios = require('axios')
 const { DEFAULT_SERVER_PORT, RESOURCES_ENDPOINT } = require('../src/Utils/constants')
+const { CustomError } = require('../src/Utils/Helpers/error')
 const app = express()
 
 /**
@@ -35,7 +36,7 @@ const get = async (originalUrl) => {
     const { data } = await axiosInstance.get(originalUrl)
     return data
   } catch (e) {
-    throw new Error(e)
+    throw new CustomError(e.response.status, e.response.data)
   }
 }
 
@@ -64,8 +65,11 @@ app.use('*', async (req, res) => {
     const data = await get(`${originalUrl}`)
     res.send(data)
   } catch (e) {
-    console.error(e)
-    res.status(500).send(e)    
+    if (e.status) {
+      res.status(e.status).send(e.message)
+    } else {
+      res.status(500).send(e)
+    }
   }
 })
 

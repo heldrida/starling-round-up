@@ -6,10 +6,13 @@ import { CtaButton } from './styled'
 import TransactionFeed from '../../Components/ TransactionFeed'
 
 const Dashboard = () => {
+  const beginningOfTime = new Date(0).toISOString()
   const [accounts, setAccounts] = useState<IAccount[] | undefined>(undefined)
   const [error, setError] = useState<IAccountResponseError | undefined>(undefined)
   const [selectedAccountUid, setSelectedAccountUid] = useState<string | undefined>(undefined)
-
+  const [categoryId, setCategoryId] = useState<string | undefined>(undefined)
+  const [changesSince] = useState<string>(beginningOfTime)
+ 
   useEffect(() => {
     const fetchHandler = async () => {
       try {
@@ -26,8 +29,9 @@ const Dashboard = () => {
 
   const accountSelectionHandler = (e: React.MouseEvent<HTMLElement>) => {
     const accountUid = e.currentTarget.getAttribute('data-accountuid')
-    accountUid &&
-    setSelectedAccountUid(accountUid)
+    const categoryid = e.currentTarget.getAttribute('data-categoryid')
+    accountUid && setSelectedAccountUid(accountUid)
+    categoryid && setCategoryId(categoryid)
   }
 
   return (
@@ -39,7 +43,9 @@ const Dashboard = () => {
           accounts &&
           accounts.map((account: IAccount, key) => (
             <Account key={key} account={account}>
-              <CtaButton onClick={accountSelectionHandler} data-accountuid={account.accountUid}>{`Select this account`}</CtaButton>
+              <CtaButton onClick={accountSelectionHandler}
+                         data-accountuid={account.accountUid}
+                         data-categoryid={account.defaultCategory}>{`Select this account`}</CtaButton>
             </Account>
           ))
         }
@@ -47,7 +53,8 @@ const Dashboard = () => {
       <div>
         {
           selectedAccountUid &&
-          <TransactionFeed selectedAccountUid={selectedAccountUid} />
+          categoryId &&
+          <TransactionFeed selectedAccountUid={selectedAccountUid} categoryId={categoryId} changesSince={changesSince} />
         }
       </div>
     </>
