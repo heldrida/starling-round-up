@@ -10,7 +10,7 @@ const LoadingSpinnerContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 4rem;
-	width: 8rem;
+	width: 100%;
 `
 
 const LoadingSpinner = styled.div`

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { getAccounts } from '../../Utils/Helpers/api'
 import { IAccount, IAccountResponseError } from '../../Utils/Types'
 import Account from '../../Components/Account'
-import { CtaButton } from './styled'
+import { DashboardContainer, DashboardSection, CtaButton } from './styled'
 import TransactionFeed from '../../Components/TransactionFeed'
 import Loading from '../../Components/Loading'
 
@@ -36,8 +36,8 @@ const Dashboard = () => {
   }
 
   return (
-    <>
-      <div>
+    <DashboardContainer>
+      <DashboardSection>
         <h1>Accounts</h1>
         {
           (!error &&
@@ -51,15 +51,15 @@ const Dashboard = () => {
           ))) ||
           <Loading />
         }
-      </div>
-      <div>
-        {
-          selectedAccountUid &&
-          categoryId &&
+      </DashboardSection>
+      {
+        selectedAccountUid &&
+        categoryId &&
+        <DashboardSection>
           <TransactionFeed selectedAccountUid={selectedAccountUid} categoryId={categoryId} changesSince={changesSince} />
-        }
-      </div>
-    </>
+        </DashboardSection>
+      }
+    </DashboardContainer>
   )
 }
 
