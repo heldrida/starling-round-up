@@ -6,6 +6,7 @@ import { TRANSACTION_TABLE_DATA_NAMES, CASH_DIRECTION_OUT } from '../../Utils/co
 import { TransactionsByWeekContainer } from './styled'
 import { getTableDataNameByType, converMinorUnitToTwoDecimal, traillingZero, getTableDateByISO, getTransactionsWeekByCashflow } from '../../Utils/Helpers'
 import RoundUpBar from '../RoundUpBar'
+import Loading from '../Loading'
 
 const TransactionFeed = ({selectedAccountUid, categoryId, changesSince}: {selectedAccountUid: string, categoryId: string, changesSince: string}) => {
   const [error, setError] = useState<IAccountResponseError | undefined>(undefined)
@@ -37,7 +38,7 @@ const TransactionFeed = ({selectedAccountUid, categoryId, changesSince}: {select
     <>
       <h1>Transactions</h1>
       {
-        !error &&
+        (!error &&
         transactionsByWeek &&
         Object.keys(transactionsByWeek).map((weekName: string, index) => {
           return (
@@ -83,7 +84,8 @@ const TransactionFeed = ({selectedAccountUid, categoryId, changesSince}: {select
               }
             </TransactionsByWeekContainer>
           )
-        })
+        })) ||
+        <Loading />
       }
     </>
   )

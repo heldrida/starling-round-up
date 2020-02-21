@@ -4,6 +4,7 @@ import { IAccount, IAccountResponseError } from '../../Utils/Types'
 import Account from '../../Components/Account'
 import { CtaButton } from './styled'
 import TransactionFeed from '../../Components/TransactionFeed'
+import Loading from '../../Components/Loading'
 
 const Dashboard = () => {
   const beginningOfTime = new Date(0).toISOString()
@@ -39,7 +40,7 @@ const Dashboard = () => {
       <div>
         <h1>Accounts</h1>
         {
-          !error &&
+          (!error &&
           accounts &&
           accounts.map((account: IAccount, key) => (
             <Account key={key} account={account}>
@@ -47,7 +48,8 @@ const Dashboard = () => {
                          data-accountuid={account.accountUid}
                          data-categoryid={account.defaultCategory}>{`Select this account`}</CtaButton>
             </Account>
-          ))
+          ))) ||
+          <Loading />
         }
       </div>
       <div>
