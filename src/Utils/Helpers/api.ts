@@ -1,6 +1,6 @@
 import { APP_ENDPOINTS, DEFAULT_SERVER_PORT } from '../constants'
 import axios from 'axios'
-import { IGetAccountsResponseData } from '../Types'
+import { IGetAccountsResponseData, IParamPutSavingGoals } from '../Types'
 
 const get = axios.get
 const put = axios.put
@@ -40,9 +40,22 @@ const getSavingsGoals = async () => {
   return await get(targetUrl)
 }
 
-const putSavingGoals = async () => {
-  const targetUrl = `${proxyServerLocation}${APP_ENDPOINTS.putSavingsGoals}`
-  return await put(targetUrl)
+const putSavingGoals = async (accountUid: string, data: IParamPutSavingGoals) => {
+  const path = APP_ENDPOINTS.putSavingsGoals.replace('$accountUid', accountUid)
+  const targetUrl = `${proxyServerLocation}${path}`
+  return await put(targetUrl, data)
+}
+
+const createSavingGoalsPutData = (name: string, currency: string, minorUnits: number, base64EncodedPhoto?: string) => {
+  return {
+    name,
+    currency,
+    'target': {
+      currency,
+      minorUnits
+    },
+    base64EncodedPhoto
+  }
 }
 
 export {
@@ -50,5 +63,6 @@ export {
   getAccounts,
   getFeedItems,
   getSavingsGoals,
-  putSavingGoals
+  putSavingGoals,
+  createSavingGoalsPutData
 }

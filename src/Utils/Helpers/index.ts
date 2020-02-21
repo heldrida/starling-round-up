@@ -3,7 +3,8 @@ import {
   getFeedItems,
   getSavingsGoals,
   putSavingGoals,
-  httpHandler
+  httpHandler,
+  createSavingGoalsPutData
 } from './api'
 
 import {
@@ -20,7 +21,8 @@ import {
   converMinorUnitToTwoDecimal,
   roundUpCurrency,
   listOfValuesComputeWith,
-  traillingZero
+  traillingZero,
+  convertTwoDecimalToMinorUnit
 } from './currency'
 
 import {
@@ -34,6 +36,7 @@ export {
   getSavingsGoals,
   putSavingGoals,
   httpHandler,
+  createSavingGoalsPutData,
   generateWeekNameByStarEndDates,
   getTransactionDate,
   getStarEndOfWeekDaysByTransactionTime,
@@ -46,5 +49,6 @@ export {
   getTableDataNameByType,
   getTableDateByISO,
   traillingZero,
-  getTransactionsWeekByCashflow
+  getTransactionsWeekByCashflow,
+  convertTwoDecimalToMinorUnit
 }

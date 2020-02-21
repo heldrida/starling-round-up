@@ -91,7 +91,7 @@ const TransactionFeed = ({selectedAccountUid, categoryId, changesSince}: {select
               {
                 cashOutTransactionWeekList &&
                 cashOutTransactionWeekList[weekName] &&
-                <RoundUpBar cashOutTransactionWeekList={cashOutTransactionWeekList[weekName]} />
+                <RoundUpBar cashOutTransactionWeekList={cashOutTransactionWeekList[weekName]} selectedAccountUid={selectedAccountUid} />
               }
             </TransactionsByWeekContainer>
           )

@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { CtaButtonSmall } from './styled'
-import { converMinorUnitToTwoDecimal, roundUpCurrency, listOfValuesComputeWith } from '../../Utils/Helpers'
-import { putSavingGoals } from '../../Utils/Helpers/api'
+import { converMinorUnitToTwoDecimal, roundUpCurrency, listOfValuesComputeWith, convertTwoDecimalToMinorUnit, putSavingGoals, createSavingGoalsPutData } from '../../Utils/Helpers'
+import { CURRENCY_DEFAULT, GOAL_NAME_DEFAULT } from '../../Utils/constants'
 
-const RoundUpBar = ({cashOutTransactionWeekList}: {cashOutTransactionWeekList: any}) => {
+interface ISaveResponse {
+  savingsGoalUid: string,
+  success: boolean,
+  errors: any[]
+}
+
+const RoundUpBar = ({cashOutTransactionWeekList, selectedAccountUid}: {cashOutTransactionWeekList: any, selectedAccountUid: string}) => {
   const [roundUp, setRoundUp] = useState(0)
+  const [saveResponse, setSaveResponse] = useState<ISaveResponse | undefined>(undefined)
 
   useEffect(() => {
     const list = cashOutTransactionWeekList &&
@@ -15,22 +22,24 @@ const RoundUpBar = ({cashOutTransactionWeekList}: {cashOutTransactionWeekList: a
   }, [])
 
   const saveRoundUpHandler = async () => {
-      // await putSavingGoals({
-      //   "name": "Lorem ipsum",
-      //   "currency": "GBP",
-      //   "target": {
-      //     "currency": "GBP",
-      //     "minorUnits": roundUp*100
-      //   },
-      //   "base64EncodedPhoto": "string"
-      // })
+    const minorUnits = convertTwoDecimalToMinorUnit(roundUp)
+    const paramSavingGoals = createSavingGoalsPutData(GOAL_NAME_DEFAULT, CURRENCY_DEFAULT, minorUnits)
+    const { data } = await putSavingGoals(selectedAccountUid, paramSavingGoals)
+    setSaveResponse(data)
   }
 
   return (
     <div>
-      <p>{`The round-up for the amount spent this week is £${roundUp}.`}</p>
-      <p>{`Would you like to transfer the amount to your savings?`}</p>
-      <CtaButtonSmall onClick={saveRoundUpHandler}>Save round-up</CtaButtonSmall>
+      {
+        (!saveResponse &&
+          <>
+            <p>{`The round-up for the amount spent this week is £${roundUp}.`}</p>
+            <p>{`Would you like to transfer the amount to your savings?`}</p>
+            <CtaButtonSmall onClick={saveRoundUpHandler}>Save round-up</CtaButtonSmall>
+          </>
+        ) ||
+        <p>{`Saved your goal ${saveResponse?.savingsGoalUid}`}</p>
+      }
     </div>
   )
 }

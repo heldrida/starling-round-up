@@ -31,11 +31,23 @@ interface ITransactionsByWeek {
   [name: string]: any
 }
 
+
+interface IParamPutSavingGoals {
+  'name': string,
+  'currency': string,
+  'target': {
+    'currency': string,
+    'minorUnits': number
+  },
+  'base64EncodedPhoto'?: string
+}
+
 export {
   IAccount,
   IGetAccountsResponseData,
   IAccountResponseError,
   IFeedItems,
   IFeedItemsList,
-  ITransactionsByWeek
+  ITransactionsByWeek,
+  IParamPutSavingGoals
 }

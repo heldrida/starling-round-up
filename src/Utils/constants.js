@@ -15,6 +15,10 @@ const TRANSACTION_TABLE_DATA_NAMES = ['minorUnits', 'direction', 'status', 'tran
 
 const CASH_DIRECTION_OUT = 'OUT'
 
+const CURRENCY_DEFAULT = 'GBP'
+
+const GOAL_NAME_DEFAULT = 'My savings goal'
+
 module.exports = {
   NUMBER_OF_DAYS_WEEK,
   APP_ENDPOINTS,
@@ -22,5 +26,7 @@ module.exports = {
   RESOURCES_ENDPOINT,
   MONTH_NAMES,
   TRANSACTION_TABLE_DATA_NAMES,
-  CASH_DIRECTION_OUT
+  CASH_DIRECTION_OUT,
+  CURRENCY_DEFAULT,
+  GOAL_NAME_DEFAULT
 }
