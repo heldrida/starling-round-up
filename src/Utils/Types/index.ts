@@ -53,7 +53,7 @@ interface IAmount {
   minorUnits: number
 }
 
-interface ICashoutTransactionWeekList {
+interface ICashoutTransactionWeekListItem {
   feedItemUid: string
   categoryUid: string
   amount: IAmount
@@ -76,7 +76,14 @@ interface ICashoutTransactionWeekList {
   spendingCategory: string
 }
 
+
+interface ICashoutTransactionWeekList {
+  [name: string]: ICashoutTransactionWeekListItem[]
+}
+
 export {
+  ICashoutTransactionWeekListItem,
+  ICashoutTransactionWeekList,
   IAccount,
   IGetAccountsResponseData,
   IAccountResponseError,
@@ -84,7 +91,6 @@ export {
   IFeedItemsList,
   ITransactionsByWeek,
   IParamPutSavingGoals,
-  ISaveResponse,
-  ICashoutTransactionWeekList
+  ISaveResponse
 }
 

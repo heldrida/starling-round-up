@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { getFeedItems } from '../../Utils/Helpers/api'
 import { groupTransactionsByWeeks } from '../../Utils/Helpers/date'
-import { IAccountResponseError, ITransactionsByWeek } from '../../Utils/Types'
+import { ICashoutTransactionWeekList, IAccountResponseError, ITransactionsByWeek } from '../../Utils/Types'
 import { TRANSACTION_TABLE_DATA_NAMES, CASH_DIRECTION_OUT } from '../../Utils/constants'
 import { TransactionsByWeekContainer } from './styled'
 import { getTableDataNameByType, converMinorUnitToTwoDecimal, traillingZero, getTableDateByISO, getTransactionsWeekByCashflow } from '../../Utils/Helpers'
 import RoundUpBar from '../RoundUpBar'
 
-interface ICashOutTrasnactionWeekList {
-  [name: string]: any
-}
-
 const TransactionFeed = ({selectedAccountUid, categoryId, changesSince}: {selectedAccountUid: string, categoryId: string, changesSince: string}) => {
   const [error, setError] = useState<IAccountResponseError | undefined>(undefined)
   const [transactionsByWeek, setTransactionsByWeek] = useState<ITransactionsByWeek | undefined>(undefined)
-  const [cashOutTransactionWeekList, setCashOutTransactionWeekList] = useState<ICashOutTrasnactionWeekList | undefined>(undefined)
+  const [cashOutTransactionWeekList, setCashOutTransactionWeekList] = useState<ICashoutTransactionWeekList | undefined>(undefined)
 
   useEffect(() => {
     const fetchHandler = async () => {
