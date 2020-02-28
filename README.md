@@ -1,6 +1,6 @@
 
-Starling: Round-up
-==================
+Starling bank: Round-up
+=======================
 
 A "round-up" feature for Starling customers using the public developer api.
 
@@ -13,8 +13,6 @@ Public API endpoints to use:
 1. Accounts - To retrieve accounts for the customer
 2. Transaction feed - To retrieve transactions for the customer
 3. Savings Goals - Create a savings goals and transfer money to savings goals
-
-Solution provided by Helder @ www.punkbit.com
 
 The project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), so
 the following common scripts are available,
